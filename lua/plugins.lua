@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
             vim.cmd('colorscheme rose-pine')
         end
     })
+
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use 'theprimeagen/harpoon'
     use 'mbbill/undotree'
@@ -39,11 +40,17 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
-    use 'hoob3rt/lualine.nvim' -- StatusLine
+    use 'kyazdani42/nvim-web-devicons'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
     use 'windwp/nvim-autopairs'
     use 'windwp/nvim-ts-autotag'
 
+    use 'ThePrimeagen/vim-be-good'
+
     -- Prettier
-    -- use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as LSP if not available
-    -- use 'MunifTanjim/prettier.nvim'       -- Prettier plugin for Neovim built-in LSP Client
+    --  use 'jose-elias-alvarez/null-ls.nvim'  -- Use Neovim as LSP if not available
+    --  use 'MunifTanjim/prettier.nvim'        -- Prettier plugin for Neovim built-in LSP Client
 end)

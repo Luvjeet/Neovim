@@ -1,6 +1,11 @@
 vim.opt.cursorline = true
-vim.opt.termguicolors = true
 vim.opt.background = 'dark'
+vim.opt.guicursor = ''
+
+vim.opt.shell = "powershell"
+vim.opt.shellcmdflag = '-command'
+vim.opt.shellquote = [[\"]]
+vim.opt.shellxquote = ""
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
