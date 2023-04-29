@@ -7,13 +7,13 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    --    use({
-    --        'rose-pine/neovim',
-    --        as = 'rose-pine',
-    --        config = function()
-    --            vim.cmd('colorscheme rose-pine')
-    --        end
-    --    })
+    --use({
+    --    'rose-pine/neovim',
+    --    as = 'rose-pine',
+    --    config = function()
+    --        vim.cmd('colorscheme rose-pine')
+    --    end
+    --})
 
     use 'ellisonleao/gruvbox.nvim'
 
