@@ -1,10 +1,11 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 local keymap = vim.keymap
 
 keymap.set('n', 'x', '"_x')
 keymap.set('i', 'jk', '<Esc>')
+
+--Netrw mode
+keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
