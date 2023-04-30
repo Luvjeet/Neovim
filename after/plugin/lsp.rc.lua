@@ -8,8 +8,7 @@ lsp.ensure_installed({
     'html',
     'tailwindcss',
     'cssls',
-    'rust_analyzer',
-    'pyright'
+    'rust_analyzer'
 })
 
 -- Fix Undefined global 'vim'
@@ -42,8 +41,13 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {}
+    suggest_lsp_servers = true,
+    sign_icons = {
+        error = 'E',
+        warn = 'W',
+        hint = 'H',
+        info = 'I'
+    }
 })
 
 
@@ -79,23 +83,6 @@ lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true
-})
-
-
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
-vim.diagnostic.config({
-    virtual_text = {
-        prefix = '●'
-    },
-    update_in_insert = true,
-    float = {
-        source = "always", -- Or "if_many"
-    },
 })
 
 --vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
