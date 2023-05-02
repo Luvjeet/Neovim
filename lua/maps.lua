@@ -5,7 +5,7 @@ keymap.set('n', 'x', '"_x')
 keymap.set('i', 'jk', '<Esc>')
 
 --Netrw mode
-keymap.set("n", "<leader>pv", vim.cmd.Ex)
+keymap.set("n", "<leader>pv", ':Sex!<Enter>')
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')

@@ -1,5 +1,6 @@
 vim.cmd [[packadd packer.nvim]]
 
+---@diagnostic disable-next-line: undefined-global
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -7,17 +8,18 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    --use({
-    --    'rose-pine/neovim',
-    --    as = 'rose-pine',
-    --    config = function()
-    --        vim.cmd('colorscheme rose-pine')
-    --    end
-    --})
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    })
 
-    use 'ellisonleao/gruvbox.nvim'
+    --use 'ellisonleao/gruvbox.nvim'
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    use 'nvim-treesitter/nvim-treesitter-context'
     use 'theprimeagen/harpoon'
     use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
@@ -37,9 +39,9 @@ return require('packer').startup(function(use)
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/nvim-cmp' }, -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' },     -- Required
+            { 'L3MON4D3/LuaSnip' }, -- Required
         }
     }
     use 'kyazdani42/nvim-web-devicons'
@@ -51,6 +53,7 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-ts-autotag'
 
     use 'ThePrimeagen/vim-be-good'
+    use 'lewis6991/gitsigns.nvim'
 
     -- Prettier
     --  use 'jose-elias-alvarez/null-ls.nvim'  -- Use Neovim as LSP if not available

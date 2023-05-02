@@ -1,5 +1,4 @@
 vim.opt.cursorline = true
-vim.opt.background = 'dark'
 vim.opt.guicursor = ''
 
 vim.opt.shell = "powershell"
