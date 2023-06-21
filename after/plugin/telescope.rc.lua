@@ -4,6 +4,12 @@ if (not status) then return end
 local builtin = require("telescope.builtin")
 
 
+telescope.setup {
+    defaults = {
+        file_ignore_patterns = { "node_modules" }
+    }
+}
+
 vim.keymap.set('n', ';f',
     function()
         builtin.find_files({

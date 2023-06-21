@@ -1,26 +1,16 @@
-local lsp = require("lsp-zero")
+local status, lsp = pcall(require, "lsp-zero")
+if (not status) then return end
+
 
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'tsserver',
-    'lua_ls',
-    'html',
-    'tailwindcss',
-    'cssls',
-    'rust_analyzer'
+    "tsserver",
+    "rust_analyzer",
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+lsp.nvim_workspace()
 
 
 local cmp = require('cmp')
@@ -32,16 +22,19 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true
     }),
+
     ["<C-Space>"] = cmp.mapping.complete(),
 })
 
+cmp_mappings['<Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings
 })
 
 lsp.set_preferences({
-    suggest_lsp_servers = true,
+    suggest_lsp_servers = false,
     sign_icons = {
         error = 'E',
         warn = 'W',
@@ -50,22 +43,8 @@ lsp.set_preferences({
     }
 })
 
-
-local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
-local enable_format_on_save = function(_, bufnr)
-    vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup_format,
-        buffer = bufnr,
-        callback = function()
-            vim.lsp.buf.format({ bufnr = bufnr })
-        end,
-    })
-end
-
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
-    enable_format_on_save(client, bufnr)
 
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -73,7 +52,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
@@ -81,8 +60,5 @@ end)
 
 lsp.setup()
 
-vim.diagnostic.config({
-    virtual_text = true
-})
+vim.diagnostic.config({ virtual_text = true })
 
---vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
