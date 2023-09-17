@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 keymap.set('n', 'x', '"_x')
---keymap.set('i', '<C-c>', '<Esc>')
 
 --Netrw mode
 keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -19,11 +18,11 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 -- Split window
 keymap.set('n', 'ss', ':split<Return><C-w>w')
 keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
--- Move window
-keymap.set('', 'sh', '<C-w>h')
-keymap.set('', 'sk', '<C-w>k')
-keymap.set('', 'sj', '<C-w>j')
-keymap.set('', 'sl', '<C-w>l')
+ -- Move window
+ keymap.set('', 'sh', '<C-w>h')
+ keymap.set('', 'sk', '<C-w>k')
+ keymap.set('', 'sj', '<C-w>j')
+ keymap.set('', 'sl', '<C-w>l')
 
 -- Resize window
 keymap.set('n', '<C-w><left>', '<C-w><')
@@ -53,6 +52,10 @@ keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- QuickFix Navigation
+keymap.set("n", "<C-j>", ":cnext<CR>", { silent = true })
+keymap.set("n", "<C-k>", ":cprev<CR>", { silent = true })
 
 --CPP EXECUTABLE
 keymap.set("n", "<F9>", ":w <bar> !clear && g++ -std=c++17 -O2 % -o %:p:h/%:t:r.exe && ./%:r.exe<CR>",
