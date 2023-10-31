@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
             vim.cmd('colorscheme rose-pine')
         end
     })
+    use "folke/tokyonight.nvim"
     use { "ellisonleao/gruvbox.nvim" }
     use({
         "folke/trouble.nvim",
@@ -69,4 +70,5 @@ return require('packer').startup(function(use)
 
     use 'ThePrimeagen/vim-be-good'
     use 'lewis6991/gitsigns.nvim'
+    use 'folke/zen-mode.nvim'
 end)

@@ -5,5 +5,4 @@ rose.setup({
     disable_background = true,
     disable_italics = true,
 })
-vim.cmd [[colorscheme rose-pine]]
-
+--vim.cmd [[colorscheme rose-pine]]
