@@ -44,5 +44,3 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.python_host_prog = '/Users/innovatia/work/venv/bin/python'
 vim.g.python3_host_prog = '/Users/innovatia/work/venv/bin/python'
-
-
