@@ -52,6 +52,19 @@ return {
                             }
                         }
                     }
+                    lspconfig.pyright.setup{
+                        settings = {
+                            python = {
+                                analysis = {
+                                    typeCheckingMode = "basic",  -- or "off" to disable type checking
+                                    diagnosticSeverityOverrides = {
+                                        reportMissingImports = "none",
+                                        reportMissingModuleSource = "none"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 end,
             }
         })

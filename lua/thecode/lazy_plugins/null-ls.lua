@@ -1,7 +1,7 @@
 return {
     "jose-elias-alvarez/null-ls.nvim",
     "MunifTanjim/prettier.nvim",
-    config = function ()
+    config = function()
         local null_ls = require("null-ls")
 
         local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
@@ -9,6 +9,12 @@ return {
         local async = event == "BufWritePost"
 
         null_ls.setup({
+            ensure_installed = {
+                "black",
+            },
+            sources = {
+                null_ls.builtins.formatting.black,
+            },
             on_attach = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then
                     vim.keymap.set("n", "<Leader>f", function()
@@ -49,6 +55,7 @@ return {
                 "typescript",
                 "typescriptreact",
                 "yaml",
+                "python",
             },
             cli_options = {
                 arrow_parens = "always",
