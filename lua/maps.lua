@@ -5,7 +5,7 @@ keymap.set('n', 'x', '"_x')
 keymap.set("i", "<C-[>", "<Esc>")
 
 --Netrw mode
--- keymap.set("n", "<leader>pv", vim.cmd.Ex)
+keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 
 -- Increment/decrement
@@ -65,3 +65,4 @@ keymap.set("n", "<C-K>", ":cprev<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
+vim.api.nvim_set_keymap('n', '<S-n>', 'N', { noremap = true, silent = true })

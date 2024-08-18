@@ -42,5 +42,4 @@ autocmd("LspAttach",{
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
-vim.g.python_host_prog = '/Users/innovatia/work/venv/bin/python'
-vim.g.python3_host_prog = '/Users/innovatia/work/venv/bin/python'
+vim.g.python3_host_prog = '/Users/innovatia/work/venv/bin/python3'

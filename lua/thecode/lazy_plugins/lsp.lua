@@ -33,6 +33,8 @@ return {
                 "intelephense",
                 "lua_ls",
                 "gopls",
+                "ruff_lsp",
+                "pylsp",
             },
             handlers = {
                 function(server_name)
@@ -52,18 +54,34 @@ return {
                             }
                         }
                     }
-                    lspconfig.pyright.setup{
+                    lspconfig.pylsp.setup{
+                        capabilities = capabilities,
                         settings = {
-                            python = {
-                                analysis = {
-                                    typeCheckingMode = "basic",  -- or "off" to disable type checking
-                                    diagnosticSeverityOverrides = {
-                                        reportMissingImports = "none",
-                                        reportMissingModuleSource = "none"
-                                    }
+                            pylsp = {
+                                plugins = {
+                                    flake8 = {
+                                        enabled = false,
+                                        maxLineLength = 119,
+                                    },
+                                    mypy = {
+                                        enabled = true,
+                                    },
+                                    pycodestyle = {
+                                        enabled = false,
+                                    },
+                                    pyflakes = {
+                                        enabled = false,
+                                    },
                                 }
                             }
-                        }
+                        },
+                    }
+                    lspconfig.ruff_lsp.setup {
+                        capabilities = capabilities
+                    }
+                    lspconfig.clangd.setup {
+                        capabilities = capabilities,
+                        root = "/usr/local/include/bits/stdc++.h"
                     }
                 end,
             }
