@@ -1,10 +1,9 @@
 function ColorMyPencils(color)
-	color = color or "rose-pine"
-	vim.cmd.colorscheme(color)
+    color = color or "rose-pine"
+    vim.cmd.colorscheme(color)
 
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 return {
@@ -14,8 +13,8 @@ return {
             require("tokyonight").setup({
                 -- your configuration comes here
                 -- or leave it empty to use the default settings
-                style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-                transparent = false, -- Enable this to disable setting the background color
+                style = "storm",         -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                transparent = false,     -- Enable this to disable setting the background color
                 terminal_colors = false, -- Configure the colors used when opening a `:terminal` in Neovim
                 styles = {
                     -- Style to be applied to different syntax groups
@@ -24,14 +23,35 @@ return {
                     keywords = { italic = false },
                     -- Background styles. Can be "dark", "transparent" or "normal"
                     sidebars = "dark", -- style for sidebars, see below
-                    floats = "dark", -- style for floating windows
+                    floats = "dark",   -- style for floating windows
                 },
-            -- vim.cmd("colorscheme tokyonight"),
-            -- ColorMyPencils("tokyonight"),
+                -- vim.cmd("colorscheme tokyonight"),
+                -- ColorMyPencils("tokyonight"),
             })
         end
     },
-
+    {
+        "Shatur/neovim-ayu",
+        config = function()
+            require("ayu").setup({
+                mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+                terminal = true, -- Set to `false` to let terminal manage its own colors.
+                overrides = {
+                    Normal = { bg = "None" },
+                    ColorColumn = { bg = "None" },
+                    SignColumn = { bg = "None" },
+                    Folded = { bg = "None" },
+                    FoldColumn = { bg = "None" },
+                    CursorLine = { bg = "None" },
+                    CursorColumn = { bg = "None" },
+                    WhichKeyFloat = { bg = "None" },
+                    VertSplit = { bg = "None" },
+                }, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+            })
+            -- vim.cmd("colorscheme ayu")
+            -- ColorMyPencils("ayu")
+        end
+    },
     {
         "rose-pine/neovim",
         name = "rose-pine",
@@ -68,10 +88,12 @@ return {
                 invert_signs = true,
                 invert_tabline = true,
                 inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "", -- can be "hard", "soft" or empty string
+                contrast = "",  -- can be "hard", "soft" or empty string
                 dim_inactive = true,
                 transparent_mode = true,
             })
+            -- vim.cmd("colorscheme gruvbox")
+            -- ColorMyPencils("gruvbox")
         end
     }
 }

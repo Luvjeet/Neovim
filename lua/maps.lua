@@ -57,7 +57,7 @@ keymap.set("x", 'N', ':norm @q<CR>')
 keymap.set('t', '<ESC>', [[<C-\><C-n>]])
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-keymap.set("n", "<leader>f", vim.lsp.buf.format)
+keymap.set("v", "<leader>f", vim.lsp.buf.format)
 
 -- QuickFix Navigation
 keymap.set("n", "<C-J>", ":cnext<CR>", { silent = true })
