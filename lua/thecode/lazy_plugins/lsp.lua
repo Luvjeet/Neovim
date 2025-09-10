@@ -24,68 +24,62 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities())
 
-        require("fidget").setup({})
-        require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "tsserver",
+            require("fidget").setup({})
+            require("mason").setup()
+            require("mason-lspconfig").setup({
+              ensure_installed = {
+                "ts_ls",
                 "rust_analyzer",
                 "intelephense",
                 "lua_ls",
                 "gopls",
-                "ruff_lsp",
                 "pylsp",
-            },
-            handlers = {
+              },
+              handlers = {
                 function(server_name)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities,
-                    }
+                  require("lspconfig")[server_name].setup {
+                    capabilities = capabilities,
+                  }
                 end,
+                -- Custom configuration for 'lua_ls'
                 ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                    lspconfig.pylsp.setup{
-                        capabilities = capabilities,
-                        settings = {
-                            pylsp = {
-                                plugins = {
-                                    flake8 = {
-                                        enabled = false,
-                                        maxLineLength = 119,
-                                    },
-                                    mypy = {
-                                        enabled = true,
-                                    },
-                                    pycodestyle = {
-                                        enabled = false,
-                                    },
-                                    pyflakes = {
-                                        enabled = false,
-                                    },
-                                }
-                            }
+                  require("lspconfig").lua_ls.setup {
+                    capabilities = capabilities,
+                    settings = {
+                      Lua = {
+                        format = {
+                          enable = true,
+                          -- Put format options here
+                          -- NOTE: the value should be STRING!!
+                          defaultConfig = {
+                            indent_style = "space",
+                            indent_size = "2",
+                          }
                         },
+                      }
                     }
-                    lspconfig.ruff_lsp.setup {
-                        capabilities = capabilities
-                    }
-                    lspconfig.clangd.setup {
-                        capabilities = capabilities,
-                        root = "/usr/local/include/bits/stdc++.h"
-                    }
+                  }
                 end,
-            }
-        })
+                -- Custom configuration for 'pylsp'
+                ["pylsp"] = function()
+                  require("lspconfig").pylsp.setup({
+                    capabilities = capabilities,
+                    settings = {
+                      pylsp = {
+                        plugins = {
+                          flake8 = { enabled = false, maxLineLength = 119 },
+                          mypy = { enabled = true },
+                          pycodestyle = { enabled = false },
+                          pyflakes = { enabled = false },
+                          jedi_definition = { enabled = true },
+                          rope_completion = { enabled = true },
+                        }
+                      }
+                    }
+                  })
+                end,
+              }
+            })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
         cmp.setup({

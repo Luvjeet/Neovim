@@ -16,7 +16,7 @@ return {
 
         vim.defer_fn(function()
           gs.toggle_current_line_blame()
-        end, 100) -- Adding a small delay to ensure gitsigns is fully initialized
+        end, 1000) -- Adding a small delay to ensure gitsigns is fully initialized
 
         local function map(mode, l, r, opts)
           opts = opts or {}

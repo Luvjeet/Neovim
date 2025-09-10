@@ -2,8 +2,9 @@ function ColorMyPencils(color)
     color = color or "rose-pine"
     vim.cmd.colorscheme(color)
 
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 end
 
 return {
@@ -13,8 +14,8 @@ return {
             require("tokyonight").setup({
                 -- your configuration comes here
                 -- or leave it empty to use the default settings
-                style = "storm",         -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-                transparent = false,     -- Enable this to disable setting the background color
+                -- style = "storm",         -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                transparent = true,      -- Enable this to disable setting the background color
                 terminal_colors = false, -- Configure the colors used when opening a `:terminal` in Neovim
                 styles = {
                     -- Style to be applied to different syntax groups
@@ -34,7 +35,7 @@ return {
         "Shatur/neovim-ayu",
         config = function()
             require("ayu").setup({
-                mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+                mirage = false,  -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
                 terminal = true, -- Set to `false` to let terminal manage its own colors.
                 overrides = {
                     Normal = { bg = "None" },
@@ -57,6 +58,7 @@ return {
         name = "rose-pine",
         config = function()
             require('rose-pine').setup({
+                variant = "moon",
                 styles = {
                     bold = true,
                     italic = false,
@@ -89,11 +91,32 @@ return {
                 invert_tabline = true,
                 inverse = true, -- invert background for search, diffs, statuslines and errors
                 contrast = "",  -- can be "hard", "soft" or empty string
-                dim_inactive = true,
-                transparent_mode = true,
+                dim_inactive = false,
+                transparent_mode = false,
             })
             -- vim.cmd("colorscheme gruvbox")
             -- ColorMyPencils("gruvbox")
         end
+    },
+    {
+        'projekt0n/github-nvim-theme',
+        name = 'github-theme',
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+        config = function()
+            require('github-theme').setup({
+                options = {
+                    transparent = true,
+                    dim_inactive = true,
+                    inverse = {               -- Inverse highlight for different types
+                      match_paren = true,
+                      visual = true,
+                      search = false,
+                    },
+                }
+            })
+            -- vim.cmd("colorscheme github_dark")
+            -- ColorMyPencils("github_dark")
+        end,
     }
 }

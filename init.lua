@@ -11,7 +11,7 @@ autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
     callback = function()
-        vim.highlight.on_yank({
+        vim.hl.on_yank({
             higroup = 'IncSearch',
             timeout = 40,
         })
@@ -43,3 +43,28 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.python3_host_prog = '/Users/innovatia/work/venv/bin/python3'
+
+-- =========================
+-- Autosave Feature
+-- =========================
+local autosave_enabled = true
+local timer = vim.loop.new_timer()
+
+timer:start(1000, 1000, vim.schedule_wrap(function()
+  if autosave_enabled and vim.api.nvim_buf_get_option(0, "modified") and vim.api.nvim_buf_get_name(0) ~= "" then
+    vim.cmd("silent! write")
+    local filepath = vim.api.nvim_buf_get_name(0)
+    local filename = vim.fn.fnamemodify(filepath, ":t")
+    vim.api.nvim_echo({{"[Autosave] Saved: " .. filename, "ModeMsg"}}, false, {})
+  end
+end))
+
+-- Command to toggle autosave
+vim.api.nvim_create_user_command("ToggleAutosave", function()
+    autosave_enabled = not autosave_enabled
+    if autosave_enabled then
+        vim.api.nvim_echo({{"[Autosave] Enabled", "ModeMsg"}}, false, {})
+    else
+        vim.api.nvim_echo({{"[Autosave] Disabled", "WarningMsg"}}, false, {})
+    end
+end, {})
