@@ -33,7 +33,7 @@ return {
                 "intelephense",
                 "lua_ls",
                 "gopls",
-                "pylsp",
+                "pyright",
               },
               handlers = {
                 function(server_name)
@@ -59,24 +59,6 @@ return {
                       }
                     }
                   }
-                end,
-                -- Custom configuration for 'pylsp'
-                ["pylsp"] = function()
-                  require("lspconfig").pylsp.setup({
-                    capabilities = capabilities,
-                    settings = {
-                      pylsp = {
-                        plugins = {
-                          flake8 = { enabled = false, maxLineLength = 119 },
-                          mypy = { enabled = true },
-                          pycodestyle = { enabled = false },
-                          pyflakes = { enabled = false },
-                          jedi_definition = { enabled = true },
-                          rope_completion = { enabled = true },
-                        }
-                      }
-                    }
-                  })
                 end,
               }
             })
